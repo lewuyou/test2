@@ -19,6 +19,7 @@ from pyti.williams_percent_r import williams_percent_r as wr
 from pyti.on_balance_volume import on_balance_volume as obv
 from pyti.accumulation_distribution import accumulation_distribution as acc_dist
 from pyti.chaikin_money_flow import chaikin_money_flow as cmf2
+from datetime import datetime, timedelta
 
 def download_data(num,args):
     '''下载指定时间段数据'''
@@ -144,3 +145,25 @@ def add_zeros_to_data(data, num_rows=20):
     data_copy = data.copy()
     data_copy.iloc[:num_rows, 1:] = 0  # 除第一列外，前num_rows行替换为0
     return data_copy
+
+# 计算总体百分比变化的函数
+def calculate_total_change(changes, start_day, end_day):
+    # 总变化是通过顺序应用每天的变化计算的，
+    # 从基础值100开始（代表股票的初始值）
+    total_value = 100
+    for change in changes[start_day-1:end_day]:
+        total_value *= (1 + change / 100)
+    # 然后根据最终值计算总体的百分比变化
+    overall_change = ((total_value - 100) / 100) * 100
+    return overall_change
+
+def add_business_days(df, n):
+    last_date = df['date'].iloc[-1]
+    new_rows = []
+    for _ in range(n):
+        next_day = last_date + timedelta(days=1)
+        while next_day.weekday() >= 5:  # 5 and 6 correspond to Saturday and Sunday
+            next_day += timedelta(days=1)
+        new_rows.append([next_day] + [0] * (len(df.columns) - 1))  # Minus 1 for the date column
+        last_date = next_day
+    return new_rows
