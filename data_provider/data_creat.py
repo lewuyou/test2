@@ -57,23 +57,23 @@ def add_data(raw_data,args):
 
     '''趋势指标'''
     # MACD
-    # raw_data['macd'] = macd(close_data, 12, 26) # default: fast_period=12, slow_period=26, signal_period=9
+    raw_data['macd'] = macd(close_data, 12, 26) # default: fast_period=12, slow_period=26, signal_period=9
     raw_data['macd2'] = macd(close_data, 48, 104)
     # 移动平均线
     raw_data['hma10'] = hma(close_data, 10)
     raw_data['hma20'] = hma(close_data, 20)
     raw_data['hma60'] = hma(close_data, 60)
-    # raw_data['ema10'] = ema(close_data, 10)
-    # raw_data['ema20'] = ema(close_data, 20)
-    # raw_data['ema60'] = ema(close_data, 60)
+    raw_data['ema5'] = ema(close_data, 5)
+    raw_data['ema10'] = ema(close_data, 10)
+    raw_data['ema20'] = ema(close_data, 20)
     # 布林带指标
-    # raw_data['upboll'] = upper_bollinger_band(close_data, 20)
-    # raw_data['miboll'] = middle_bollinger_band(close_data, 20)
-    # raw_data['loboll'] = lower_bollinger_band(close_data, 20)
-    # raw_data['baboll'] = bandwidth(close_data, 20)
-    # raw_data['bbboll'] = bb_range(close_data, 20)
-    # raw_data['peboll'] = percent_bandwidth(close_data, 20)
-    # raw_data['pbboll'] = percent_b(close_data, 20)
+    raw_data['upboll'] = upper_bollinger_band(close_data, 20)
+    raw_data['miboll'] = middle_bollinger_band(close_data, 20)
+    raw_data['loboll'] = lower_bollinger_band(close_data, 20)
+    raw_data['baboll'] = bandwidth(close_data, 20)
+    raw_data['bbboll'] = bb_range(close_data, 20)
+    raw_data['peboll'] = percent_bandwidth(close_data, 20)
+    raw_data['pbboll'] = percent_b(close_data, 20)
     # 一目均衡表
     raw_data['ichimoku1'] = tenkansen(close_data)
     raw_data['ichimoku2'] = kijunsen(close_data)
@@ -85,22 +85,22 @@ def add_data(raw_data,args):
     # Rsi  相对强弱指标
     raw_data['rsi'] = rsi(close_data, 14)
     # KDJ 随机指标
-    # raw_data['kdj_k'] = kdj_k(close_data, 9)
-    # raw_data['kdj_d'] = kdj_d(close_data, 9)
+    raw_data['kdj_k'] = kdj_k(close_data, 9)
+    raw_data['kdj_d'] = kdj_d(close_data, 9)
     # cci 用来衡量股价是否已经偏离其平均价格
-    # raw_data['cci'] = cci(close_data, high_data, low_data, 20)
+    raw_data['cci'] = cci(close_data, high_data, low_data, 20)
     # Williams %R 威廉指标
-    # raw_data['wr'] = wr(close_data)
+    raw_data['wr'] = wr(close_data)
     
     '''成交量指标'''
     # Chaikin Money Flow 蔡金货币流量指标
     raw_data['twf_feat'] = twf_feat(close_data, high_data, low_data, volume_data, 21)
     # obv
-    # raw_data['obv'] = obv(close_data, volume_data)
+    raw_data['obv'] = obv(close_data, volume_data)
     # acc_dist 累积/派发指标
-    # raw_data['acc_dist'] = acc_dist(close_data, high_data, low_data, volume_data)
+    raw_data['acc_dist'] = acc_dist(close_data, high_data, low_data, volume_data)
     # cmf2
-    # raw_data['cmf2'] = cmf2(close_data, high_data, low_data, volume_data, 20)
+    raw_data['cmf2'] = cmf2(close_data, high_data, low_data, volume_data, 20)
     
     
     print(f'添加数据以后形状： {raw_data.shape}')
