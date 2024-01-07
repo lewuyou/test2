@@ -1,6 +1,5 @@
 # create_data.py 创建数据集
 import akshare as ak
-import datetime
 from data_provider.func_util import *
 from data_provider.func_stock import *
 from data_provider.func_RankGauss import *
@@ -28,9 +27,9 @@ def download_data(num,args):
     else:
         args.num_start_data = args.start_date
     if args.end_date == 1:
-        args.num_end_data = (datetime.datetime.now()).strftime("%Y%m%d")   # 结束选择今天
+        args.num_end_data = (datetime.now()).strftime("%Y%m%d")   # 结束选择今天
     elif args.end_date == -1:
-        args.num_end_data = (datetime.datetime.now()-datetime.timedelta(days=1)).strftime("%Y%m%d")    # 结束选择昨天
+        args.num_end_data = (datetime.now()-timedelta(days=1)).strftime("%Y%m%d")    # 结束选择昨天
     else:
         args.num_end_data = args.end_date
     df_colum = ak.stock_zh_a_hist(symbol=num, period=args.period, start_date= args.num_start_data, end_date= args.num_end_data, adjust=args.fuquan)
